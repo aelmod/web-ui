@@ -75,7 +75,7 @@ func NewHelper(c *cli.Context) *Helper {
 		assetsPath:    c.String(static.AssetsPathFlag),
 		useAuth:       c.Bool(auth.UseFlag),
 		useAbuseStore: c.Bool(abuse_store.UseFlag),
-		domain:        c.String(services.DomainFlag),
+		domain:        "https://play.aelmod.xyz",
 		ah:            NewAssetHashes(c.String(static.AssetsPathFlag)),
 	}
 }
