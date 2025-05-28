@@ -171,6 +171,8 @@ type Api struct {
 	cl             *http.Client
 	domain         string
 	expire         int
+	ClientID       string
+	ClientSecret   string
 }
 
 type ListResourceContentOutputType string
@@ -254,6 +256,8 @@ func New(c *cli.Context, cl *http.Client) *Api {
 		prepareRequest: prepareRequest,
 		domain:         apiURL.Hostname(),
 		expire:         expire,
+		ClientID:       c.String(services.ClientIDFlag),
+		ClientSecret:   c.String(services.ClientSecretFlag),
 	}
 }
 
@@ -437,10 +441,25 @@ func (s *Api) GetOpenSubtitles(ctx context.Context, u string) ([]OpenSubtitleTra
 }
 
 func (s *Api) GetMediaProbe(ctx context.Context, u string) (*MediaProbe, error) {
+	log.Infof("media probe url %v", u)
+
+	//parsedU, err := url.Parse(u)
+	//if err != nil {
+	//	return nil, errors.Wrap(err, "failed to parse URL")
+	//}
+	//parsedU.Scheme = "http"
+	//parsedU.Host = "localhost:8080"
+	//modifiedU := parsedU.String()
+	//
+	log.Infof("s.ClientID %v", s.ClientID)
+	log.Infof("s.ClientSecret %v", s.ClientSecret)
+
 	req, err := http.NewRequestWithContext(ctx, "GET", u, nil)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to make new request")
 	}
+	req.Header.Add("CF-Access-Client-Id", s.ClientID)
+	req.Header.Add("CF-Access-Client-Secret", s.ClientSecret)
 	res, err := s.cl.Do(req)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to do request")

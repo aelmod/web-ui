@@ -9,14 +9,16 @@ import (
 var SHA1R = regexp.MustCompile("(?i)[0-9a-f]{5,40}")
 
 var (
-	DomainFlag      = "domain"
-	DemoMagnetFlag  = "demo-magnet"
-	DemoTorrentFlag = "demo-torrent"
-	SMTPHostFlag    = "smtp-host"
-	SMTPUserFlag    = "smtp-user"
-	SMTPPassFlag    = "smtp-pass"
-	SMTPPortFlag    = "smtp-port"
-	SMTPSecureFlag  = "smtp-secure"
+	DomainFlag       = "domain"
+	DemoMagnetFlag   = "demo-magnet"
+	DemoTorrentFlag  = "demo-torrent"
+	SMTPHostFlag     = "smtp-host"
+	SMTPUserFlag     = "smtp-user"
+	SMTPPassFlag     = "smtp-pass"
+	SMTPPortFlag     = "smtp-port"
+	SMTPSecureFlag   = "smtp-secure"
+	ClientIDFlag     = "client-id"
+	ClientSecretFlag = "client-secret"
 )
 
 func RegisterFlags(f []cli.Flag) []cli.Flag {
@@ -64,6 +66,16 @@ func RegisterFlags(f []cli.Flag) []cli.Flag {
 			Name:   SMTPSecureFlag,
 			Usage:  "smtp secure",
 			EnvVar: "SMTP_SECURE",
+		},
+		cli.StringFlag{
+			Name:   ClientIDFlag,
+			Usage:  "Cloudflare client id",
+			EnvVar: "CLIENT_ID",
+		},
+		cli.StringFlag{
+			Name:   ClientSecretFlag,
+			Usage:  "cloudflare client secret",
+			EnvVar: "CLIENT_SECRET",
 		},
 	)
 
