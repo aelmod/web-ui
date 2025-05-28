@@ -10,6 +10,7 @@ import (
 	"github.com/webtor-io/web-ui/services/embed"
 	"github.com/webtor-io/web-ui/services/web"
 	"io"
+	"net/url"
 	"strings"
 	"time"
 
@@ -124,6 +125,17 @@ func (s *ActionScript) streamContent(ctx context.Context, j *job.Job, c *web.Con
 			SrcLang: v.SrcLang,
 			Default: v.Default != nil,
 		})
+	}
+
+	for _, v := range sc.ExternalData.Tracks {
+		parsedU, err := url.Parse(v.Src)
+		if err != nil {
+			return
+		}
+		parsedU.Scheme = "https"
+		parsedU.Host = "play.aelmod.xyz"
+		modifiedU := parsedU.String()
+		v.Src = modifiedU
 	}
 	err = s.renderActionTemplate(j, c, sc, template)
 	if err != nil {
