@@ -130,7 +130,7 @@ func (s *ActionScript) streamContent(ctx context.Context, j *job.Job, c *web.Con
 	for _, v := range sc.ExternalData.Tracks {
 		parsedU, err := url.Parse(v.Src)
 		if err != nil {
-			return
+			return err
 		}
 		parsedU.Scheme = "https"
 		parsedU.Host = "play.aelmod.xyz"
