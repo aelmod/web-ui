@@ -7,11 +7,9 @@ import (
 	"fmt"
 	"github.com/anacrolix/torrent/metainfo"
 	"github.com/pkg/errors"
-	"github.com/webtor-io/web-ui/services"
 	"github.com/webtor-io/web-ui/services/embed"
 	"github.com/webtor-io/web-ui/services/web"
 	"io"
-	"net/url"
 	"strings"
 	"time"
 
@@ -128,22 +126,22 @@ func (s *ActionScript) streamContent(ctx context.Context, j *job.Job, c *web.Con
 		})
 	}
 
-	for i := range sc.ExportTag.Sources {
-		newDomainUrl, err := url.Parse(string(services.WebDomainFlag))
-		if err != nil {
-			return err
-		}
-
-		parsedU, err := url.Parse(sc.ExportTag.Sources[i].Src)
-		if err != nil {
-			return err
-		}
-
-		parsedU.Scheme = newDomainUrl.Scheme
-		parsedU.Host = newDomainUrl.Host
-		modifiedU := parsedU.String()
-		sc.ExportTag.Sources[i].Src = modifiedU
-	}
+	//for i := range sc.ExportTag.Sources {
+	//	newDomainUrl, err := url.Parse(string(services.WebDomainFlag))
+	//	if err != nil {
+	//		return err
+	//	}
+	//
+	//	parsedU, err := url.Parse(sc.ExportTag.Sources[i].Src)
+	//	if err != nil {
+	//		return err
+	//	}
+	//
+	//	parsedU.Scheme = newDomainUrl.Scheme
+	//	parsedU.Host = newDomainUrl.Host
+	//	modifiedU := parsedU.String()
+	//	sc.ExportTag.Sources[i].Src = modifiedU
+	//}
 
 	err = s.renderActionTemplate(j, c, sc, template)
 	if err != nil {

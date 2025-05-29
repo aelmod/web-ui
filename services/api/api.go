@@ -441,6 +441,10 @@ func (s *Api) GetMediaProbe(ctx context.Context, u string) (*MediaProbe, error) 
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to make new request")
 	}
+
+	req.Header.Add("CF-Access-Client-Id", services.ClientIDFlag)
+	req.Header.Add("CF-Access-Client-Secret", services.ClientSecretFlag)
+
 	res, err := s.cl.Do(req)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to do request")

@@ -9,15 +9,17 @@ import (
 var SHA1R = regexp.MustCompile("(?i)[0-9a-f]{5,40}")
 
 var (
-	DomainFlag      = "domain"
-	DemoMagnetFlag  = "demo-magnet"
-	DemoTorrentFlag = "demo-torrent"
-	SMTPHostFlag    = "smtp-host"
-	SMTPUserFlag    = "smtp-user"
-	SMTPPassFlag    = "smtp-pass"
-	SMTPPortFlag    = "smtp-port"
-	SMTPSecureFlag  = "smtp-secure"
-	WebDomainFlag   = "web-domain"
+	DomainFlag       = "domain"
+	DemoMagnetFlag   = "demo-magnet"
+	DemoTorrentFlag  = "demo-torrent"
+	SMTPHostFlag     = "smtp-host"
+	SMTPUserFlag     = "smtp-user"
+	SMTPPassFlag     = "smtp-pass"
+	SMTPPortFlag     = "smtp-port"
+	SMTPSecureFlag   = "smtp-secure"
+	WebDomainFlag    = "web-domain"
+	ClientIDFlag     = "client-id"
+	ClientSecretFlag = "client-secret"
 )
 
 func RegisterFlags(f []cli.Flag) []cli.Flag {
@@ -71,6 +73,16 @@ func RegisterFlags(f []cli.Flag) []cli.Flag {
 			Usage:  "web domain",
 			Value:  "http://localhost:8080",
 			EnvVar: "WEB_DOMAIN",
+		},
+		cli.StringFlag{
+			Name:   ClientIDFlag,
+			Usage:  "cf client id",
+			EnvVar: "CLIENT_ID",
+		},
+		cli.StringFlag{
+			Name:   ClientSecretFlag,
+			Usage:  "cf client secret",
+			EnvVar: "CLIENT_SECRET",
 		},
 	)
 
