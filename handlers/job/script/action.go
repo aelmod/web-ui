@@ -128,19 +128,19 @@ func (s *ActionScript) streamContent(ctx context.Context, j *job.Job, c *web.Con
 		})
 	}
 
-	for _, v := range sc.ExportTag.Sources {
-		log.Infof("track url orig %v", v.Src)
+	for i := range sc.ExportTag.Sources {
+		log.Infof("track url orig %v", sc.ExportTag.Sources[i].Src)
 
-		parsedU, err := url.Parse(v.Src)
+		parsedU, err := url.Parse(sc.ExportTag.Sources[i].Src)
 		if err != nil {
 			return err
 		}
 		parsedU.Scheme = "https"
 		parsedU.Host = "play.aelmod.xyz"
 		modifiedU := parsedU.String()
-		v.Src = modifiedU
+		sc.ExportTag.Sources[i].Src = modifiedU
 
-		log.Infof("track url updated %v", v.Src)
+		log.Infof("track url updated %v", sc.ExportTag.Sources[i].Src)
 	}
 
 	dbstr, _ := json.Marshal(sc)
