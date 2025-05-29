@@ -17,6 +17,7 @@ var (
 	SMTPPassFlag    = "smtp-pass"
 	SMTPPortFlag    = "smtp-port"
 	SMTPSecureFlag  = "smtp-secure"
+	WebDomainFlag   = "web-domain"
 )
 
 func RegisterFlags(f []cli.Flag) []cli.Flag {
@@ -64,6 +65,12 @@ func RegisterFlags(f []cli.Flag) []cli.Flag {
 			Name:   SMTPSecureFlag,
 			Usage:  "smtp secure",
 			EnvVar: "SMTP_SECURE",
+		},
+		cli.StringFlag{
+			Name:   WebDomainFlag,
+			Usage:  "web domain",
+			Value:  "http://localhost:8080",
+			EnvVar: "WEB_DOMAIN",
 		},
 	)
 
