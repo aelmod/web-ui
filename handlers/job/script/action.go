@@ -144,7 +144,7 @@ func (s *ActionScript) streamContent(ctx context.Context, j *job.Job, c *web.Con
 	}
 
 	dbstr, _ := json.Marshal(sc)
-	log.Infof("struct debug: %v", dbstr)
+	log.Infof("struct debug: %v", string(dbstr))
 
 	err = s.renderActionTemplate(j, c, sc, template)
 	if err != nil {
