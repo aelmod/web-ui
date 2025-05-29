@@ -128,7 +128,7 @@ func (s *ActionScript) streamContent(ctx context.Context, j *job.Job, c *web.Con
 		})
 	}
 
-	for _, v := range sc.ExternalData.Tracks {
+	for _, v := range sc.ExportTag.Sources {
 		log.Infof("track url orig %v", v.Src)
 
 		parsedU, err := url.Parse(v.Src)
