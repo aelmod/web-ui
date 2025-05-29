@@ -141,6 +141,9 @@ func (s *ActionScript) streamContent(ctx context.Context, j *job.Job, c *web.Con
 
 		log.Infof("track url updated %v", v.Src)
 	}
+
+	log.Infof("%+v\n", sc)
+
 	err = s.renderActionTemplate(j, c, sc, template)
 	if err != nil {
 		return errors.Wrap(err, "failed to render resource")
