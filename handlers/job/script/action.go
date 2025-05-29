@@ -128,6 +128,8 @@ func (s *ActionScript) streamContent(ctx context.Context, j *job.Job, c *web.Con
 	}
 
 	for _, v := range sc.ExternalData.Tracks {
+		log.Infof("track url orig %v", v.Src)
+
 		parsedU, err := url.Parse(v.Src)
 		if err != nil {
 			return err
@@ -136,6 +138,8 @@ func (s *ActionScript) streamContent(ctx context.Context, j *job.Job, c *web.Con
 		parsedU.Host = "play.aelmod.xyz"
 		modifiedU := parsedU.String()
 		v.Src = modifiedU
+
+		log.Infof("track url updated %v", v.Src)
 	}
 	err = s.renderActionTemplate(j, c, sc, template)
 	if err != nil {
