@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"crypto/sha1"
+	"encoding/json"
 	"fmt"
 	"github.com/anacrolix/torrent/metainfo"
 	"github.com/pkg/errors"
@@ -142,8 +143,8 @@ func (s *ActionScript) streamContent(ctx context.Context, j *job.Job, c *web.Con
 		log.Infof("track url updated %v", v.Src)
 	}
 
-	log.Infof("struct debug: %+v\n", sc)
-	log.Infof("%+v\n", sc)
+	dbstr, _ := json.Marshal(sc)
+	log.Infof("struct debug: %v", dbstr)
 
 	err = s.renderActionTemplate(j, c, sc, template)
 	if err != nil {
