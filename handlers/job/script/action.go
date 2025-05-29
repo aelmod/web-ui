@@ -142,6 +142,7 @@ func (s *ActionScript) streamContent(ctx context.Context, j *job.Job, c *web.Con
 		log.Infof("track url updated %v", v.Src)
 	}
 
+	log.Infof("struct debug: %+v\n", sc)
 	log.Infof("%+v\n", sc)
 
 	err = s.renderActionTemplate(j, c, sc, template)
